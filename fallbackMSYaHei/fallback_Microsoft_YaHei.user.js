@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fallback Microsoft YaHei
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
 // @author       You
 // @grant        none
@@ -9,6 +9,8 @@
 /* jshint -W097 */
 'use strict';
 
+
+// load jQuery when it's not included in original website
 if(!window.jQuery)
 {
    var script = document.createElement('script');
@@ -17,10 +19,12 @@ if(!window.jQuery)
    document.getElementsByTagName('head')[0].appendChild(script);
 }
 
-var myFont = "Microsoft YaHei";
-$("*").each(function(index) {
-    var fontFamily = $(this).css("font-family");
-    if (fontFamily.indexOf(myFont) < 0) {
-        $(this).css("font-family", fontFamily + ", " + myFont);
-    }
+jQuery(document).ready(function($){
+	var myFont = "Microsoft YaHei";
+	$("*").each(function(index) {
+		var fontFamily = $(this).css("font-family");
+		if (fontFamily.indexOf(myFont) < 0) {
+			$(this).css("font-family", fontFamily + ", " + myFont);
+		}
+	});
 });
